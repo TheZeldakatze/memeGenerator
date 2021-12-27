@@ -1,0 +1,14 @@
+Ich schreibe mir gerade meinen eigenen Meme-Generator, weil imgflip mir zu umständlich ist und auch keine Alt-Texte unterstützt. Die roten Kasten sind derzeit noch Debug-Zeug, das kommt bald weg.
+Eigentlich ist der Zeilenumbruch links noch nicht wirklich möglich, dass sind mehrere Felder.
+
+Das Programm ist Quelloffen und unter https://github.com/TheZeldakatze/memeGenerator zu finden
+
+!B
+
+Bildbeschreibung:
+Das Bild ist in zwei Teile Aufgeteilt, im ersten Teil ist eine UNO-Karte, auf der Oben "keinen eigenen Meme-Generator schreiben" und darunter "OR draw 25" steht ("oder ziehe 25"). Im zweiten Feld ist ein Mensch zu sehen, der mehr als 25 Karten hält. Das zweite Feld ist mit "Ich: " betitelt
+
+
+
+Bildbeschreibung:
+Das Bild ist in zwei Teile Aufgeteilt, im ersten Teil ist eine UNO-Karte, auf der Oben "keinen eigenen Meme-Generator schreiben" und darunter "OR draw 25" steht ("oder ziehe 25"). Im zweiten Feld ist ein Mensch zu sehen, der mehr als 25 Karten hält. Das zweite Feld ist mit "Ich: " betitelt

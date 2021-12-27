@@ -1,0 +1,4 @@
+# x1 y1 x2 y2 rotation fontName fontSize borderSize shadowSize fontColor borderColor shadowColor
+10 10 490 80 0 impact 55 2 1 WHITE black black
+110 230 390 500 1 impact 55 2 1 WHITE black black
+10 530 490 600 0 impact 55 2 1 white black black
