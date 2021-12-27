@@ -26,6 +26,7 @@ public class MemeFrame extends JPanel {
 	BufferedImage offscreen;
 	Image background;
 	private MemeTextField textFields[];
+	private boolean showTextFieldBorders;
 	
 	public MemeFrame(MemeGenerator main, Logger l) {
 		memeGenerator = main;
@@ -94,6 +95,11 @@ public class MemeFrame extends JPanel {
 		return textFields;
 	}
 	
+	public void showTextFieldBorders(boolean b) {
+		showTextFieldBorders = b;
+		repaint();
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -130,8 +136,10 @@ public class MemeFrame extends JPanel {
 				}
 				
 				// draw a rectangle to show the size of the field
-				offscreenGraphics.setColor(Color.RED);
-				offscreenGraphics.drawRect(x, y, mtf.getWidth(), mtf.getHeight());
+				if(showTextFieldBorders) {
+					offscreenGraphics.setColor(Color.RED);
+					offscreenGraphics.drawRect(x, y, mtf.getWidth(), mtf.getHeight());
+				}
 				
 				// draw the memeTextField
 				mtf.draw(offscreenGraphics, x, y);

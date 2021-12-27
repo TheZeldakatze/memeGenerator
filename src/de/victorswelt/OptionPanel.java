@@ -12,10 +12,13 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -29,7 +32,7 @@ public class OptionPanel extends JPanel {
 	Logger logger;
 	
 	JButton exportButton, saveButton, loadButton;
-	
+	JCheckBox showTextFieldBoxes;
 	JFrame frame;
 	
 	ArrayList<TextPropertyField> textPropertyFields;
@@ -46,6 +49,8 @@ public class OptionPanel extends JPanel {
 		textPropertyFieldContainer = new JPanel();
 		textPropertyFieldContainer.setLayout(new BoxLayout(textPropertyFieldContainer, BoxLayout.Y_AXIS));
 		add(textPropertyFieldContainer);
+		
+		showTextFieldBoxes = new JCheckBox("Show text field borders");
 		
 		loadButton = new JButton("Load meme");
 		saveButton = new JButton("Save meme");
@@ -87,8 +92,17 @@ public class OptionPanel extends JPanel {
 			}
 		});
 		
+		showTextFieldBoxes.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				memeFrame.showTextFieldBorders(showTextFieldBoxes.isSelected());
+			}
+		});
+		
 		add(saveButton);
 		add(exportButton);
+		add(showTextFieldBoxes);
 		
 		// create a frame to show everything
 		frame = new JFrame("Meme settings");
