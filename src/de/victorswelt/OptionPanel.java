@@ -2,6 +2,8 @@ package de.victorswelt;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -145,6 +147,7 @@ public class OptionPanel extends JPanel {
 		// now add as many as necessary (old ones are kept to preserve any text inside them)
 		for(int i = 0; i<memeTextFields.length; i++) {
 			textPropertyFieldContainer.add(textPropertyFields.get(i));
+			textPropertyFields.get(i).change();
 		}
 		
 		// revalidate and resize
@@ -160,6 +163,7 @@ class TextPropertyField extends JPanel {
 	MemeFrame memeFrame;
 	
 	public TextPropertyField(int id, MemeFrame memeFrame) {
+		this.id = id;
 		this.memeFrame = memeFrame;
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -183,15 +187,30 @@ class TextPropertyField extends JPanel {
 			public void changedUpdate(DocumentEvent e) {
 				change();
 			}
-			
-			public void change() {
-				MemeTextField mtf = memeFrame.getTextFieldAt(id);
-				if(mtf != null) {
-					mtf.text = text.getText();
-					memeFrame.repaint();
-					
-				}
-			}
 		});
+		text.addComponentListener(new ComponentListener() {
+			
+			@Override
+			public void componentShown(ComponentEvent e) {
+				change();
+			}
+			
+			@Override
+			public void componentResized(ComponentEvent e) {}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {}
+			
+			@Override
+			public void componentHidden(ComponentEvent e) {}
+		});
+	}
+	
+	public void change() {
+		MemeTextField mtf = memeFrame.getTextFieldAt(id);
+		if(mtf != null) {
+			mtf.text = text.getText();
+			memeFrame.repaint();
+		}
 	}
 }
