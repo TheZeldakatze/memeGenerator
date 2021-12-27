@@ -1,5 +1,3 @@
 # x1 y1 x2 y2 rotation fontName fontSize borderSize shadowSize fontColor borderColor shadowColor
 100 160 200 240 0 comic 16 0 0 black black black
-100 190 200 240 0 comic 16 0 0 black black black
-100 220 200 240 0 comic 16 0 0 black black black
 260 5 500 40 0 impact 24 0 0 white black black

@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.util.logging.Logger;
@@ -72,22 +74,26 @@ public class MemeTextField {
 	}
 	
 	public void draw(Graphics2D g, int xoff, int yoff) {
+		Font derived = font.deriveFont(fontSize * 1f).deriveFont(Font.PLAIN);
 		if(text.isEmpty())
 			text = " ";
 		AttributedString attributedText = new AttributedString(text);
-		//attributedText.addAttribute(TextAttribute.FONT, font);
-		attributedText.addAttribute(TextAttribute.SIZE, fontSize);
+		attributedText.addAttribute(TextAttribute.FONT, derived);
+		//attributedText.addAttribute(TextAttribute.SIZE, fontSize);
 		AttributedCharacterIterator aci = attributedText.getIterator();
-		/*LineBreakMeasurer lineMeasurer = new LineBreakMeasurer(aci, g.getFontRenderContext());
+		LineBreakMeasurer lineMeasurer = new LineBreakMeasurer(aci, g.getFontRenderContext());
 		int beginIndex = aci.getBeginIndex(),
-				endIndex = aci.getEndIndex();
-		*/
+				endIndex = aci.getEndIndex(), yLineOff = 0;
+		lineMeasurer.setPosition(beginIndex);
 		
-		Font derived = font.deriveFont(fontSize * 1f).deriveFont(Font.PLAIN);
-		FontMetrics fm = g.getFontMetrics(derived);
-		g.setFont(derived);
 		g.setColor(foreground);
-		g.drawString(text, xoff, yoff + fm.getAscent() + fm.getLeading());
+		
+		while(lineMeasurer.getPosition() < endIndex) {
+			TextLayout layout = lineMeasurer.nextLayout(width);
+			yLineOff += layout.getAscent();
+			layout.draw(g, xoff, yoff + yLineOff);
+			yLineOff += layout.getAscent() + layout.getLeading();
+		}
 	}
 	
 }
