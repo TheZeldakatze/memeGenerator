@@ -48,7 +48,6 @@ public class MemeTemplate {
 		if(image == null)
 			try {
 				image = ImageIO.read(imageFile);
-				Logger.getGlobal().info("Reloaded image " + imageFile.getAbsolutePath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

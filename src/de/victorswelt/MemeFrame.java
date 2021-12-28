@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.geom.AffineTransform;
@@ -80,7 +81,10 @@ public class MemeFrame extends JPanel {
 		background = currentTemplate.getImage();
 		offscreen = new BufferedImage(background.getWidth(null), background.getHeight(null), BufferedImage.TYPE_INT_RGB);
 		textFields = currentTemplate.createTextFields();
-		frame.setSize(offscreen.getWidth(null), offscreen.getHeight(null));
+		
+		Insets insets = frame.getInsets();
+		frame.setSize(offscreen.getWidth(null) + insets.left + insets.right, 
+				offscreen.getHeight(null) + insets.top + insets.bottom);
 		repaint();
 		
 		// refresh the option panel
