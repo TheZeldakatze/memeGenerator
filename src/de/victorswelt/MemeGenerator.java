@@ -236,11 +236,8 @@ public class MemeGenerator {
 				
 				// split the string
 				String fontName = fontFileName.substring(0, suffixPosition);
-				String fontSuffix = fontFileName.substring(suffixPosition, fontFileName.length());
+				//String fontSuffix = fontFileName.substring(suffixPosition, fontFileName.length());
 				
-				int fontType = Font.TRUETYPE_FONT;
-				
-				// TODO detect other font types based on the ending
 				FileInputStream fis = new FileInputStream(fontFile);
 				Font f = Font.createFont(Font.TRUETYPE_FONT, fis);
 				fis.close();
@@ -254,10 +251,6 @@ public class MemeGenerator {
 				logger.warning(fontFile.getAbsolutePath() + ": could not read font");
 				e.printStackTrace();
 			}
-		}
-		
-		for(String s : ge.getAvailableFontFamilyNames()) {
-			//logger.info(s);
 		}
 		
 		return map;

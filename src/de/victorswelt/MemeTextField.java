@@ -2,14 +2,12 @@ package de.victorswelt;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
-import java.util.logging.Logger;
 
 public class MemeTextField {
 	int x1, x2, y1, y2, rotation, width, height, fontSize, borderWidth, shadowSize;

@@ -2,12 +2,9 @@ package de.victorswelt;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -19,6 +16,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class MemeList extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
 	MemeGenerator memeGenerator;
 	MemeFrame memeFrame;
 	private JList<MemeTemplate> list;
