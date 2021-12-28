@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,6 +24,8 @@ public class MemeTemplate {
 		previewIcon = new ImageIcon(image.getScaledInstance(32, 32, Image.SCALE_SMOOTH));
 		textFieldTemplates = new MemeTextField[textFields.size()];
 		for(int i = 0; i< textFields.size(); i++) textFieldTemplates[i] = textFields.get(i);
+		
+		unloadImage();
 	}
 	
 	public MemeTextField[] createTextFields() {
@@ -42,7 +45,19 @@ public class MemeTemplate {
 	}
 
 	public Image getImage() {
+		if(image == null)
+			try {
+				image = ImageIO.read(imageFile);
+				Logger.getGlobal().info("Reloaded image " + imageFile.getAbsolutePath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		return image;
+	}
+	
+	public void unloadImage() {
+		image.flush();
+		image = null;
 	}
 	
 	public String toString() {

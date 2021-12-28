@@ -65,6 +65,11 @@ public class MemeFrame extends JPanel {
 	}
 	
 	public void setTemplate(MemeTemplate mt) {
+		if(currentTemplate == mt)
+			return;
+		
+		if(currentTemplate != null)
+			currentTemplate.unloadImage();
 		currentTemplate = mt;
 		
 		// clear the old offscreen
