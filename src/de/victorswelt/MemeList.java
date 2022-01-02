@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -43,8 +44,11 @@ public class MemeList extends JPanel {
 			}
 		});
 		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setAutoscrolls(true);
+		
 		JFrame frame = new JFrame("Meme list");
-		frame.getContentPane().add(list);
+		frame.getContentPane().add(scrollPane);
 		frame.setSize(200, 360);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(memeFrame);
