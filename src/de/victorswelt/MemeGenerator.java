@@ -37,6 +37,7 @@ public class MemeGenerator {
 	public MemeGenerator() {
 		logger = Logger.getGlobal();
 		
+		
 		// initialize the folder paths
 		// TODO This should be in the executable directory
 		dataDirectory = getOrCreateFolder("");

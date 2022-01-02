@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -161,7 +162,10 @@ public class OptionPanel extends JPanel {
 		// now add as many as necessary (old ones are kept to preserve any text inside them)
 		for(int i = 0; i<memeTextFields.length; i++) {
 			textPropertyFieldContainer.add(textPropertyFields.get(i));
-			textPropertyFields.get(i).change();
+			TextPropertyField tpf = textPropertyFields.get(i);
+			tpf.change();
+			tpf.useSize();
+			
 		}
 		
 		// revalidate and resize
@@ -173,7 +177,7 @@ public class OptionPanel extends JPanel {
 class TextPropertyField extends JPanel {
 	private static final long serialVersionUID = 1L;
 	int id;
-	JTextField text;
+	JTextField text, size;
 	MemeFrame memeFrame;
 	
 	public TextPropertyField(int id, MemeFrame memeFrame) {
@@ -183,6 +187,7 @@ class TextPropertyField extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setBorder(BorderFactory.createTitledBorder("Text Field " + id));
 		text = new JTextField();
+		add(new JLabel("Text: "));
 		add(text);
 		
 		text.getDocument().addDocumentListener(new DocumentListener() {
@@ -218,6 +223,28 @@ class TextPropertyField extends JPanel {
 			@Override
 			public void componentHidden(ComponentEvent e) {}
 		});
+		
+		
+		size = new JTextField();
+		size.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				applySize(size.getText());
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				applySize(size.getText());
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				applySize(size.getText());
+			}
+		});
+		add(new JLabel("Size: "));
+		add(size);
 	}
 	
 	public void change() {
@@ -225,6 +252,23 @@ class TextPropertyField extends JPanel {
 		if(mtf != null) {
 			mtf.text = text.getText();
 			memeFrame.repaint();
+		}
+	}
+	
+	private void applySize(String s) {
+		MemeTextField mtf = memeFrame.getTextFieldAt(id);
+		if(mtf != null)
+		try {
+			mtf.fontSize = Integer.parseInt(s);
+			memeFrame.repaint();
+		} catch(NumberFormatException e) {
+		}
+	}
+	
+	void useSize() {
+		MemeTextField mtf = memeFrame.getTextFieldAt(id);
+		if(mtf != null) {
+			size.setText(mtf.fontSize + "");
 		}
 	}
 }
